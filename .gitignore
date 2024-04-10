@@ -5,6 +5,8 @@
 *.7z
 *.swp
 *~
+test_file.txt
+test_file_with_as.txt
 
 ### Python ###
 # Byte-compiled / optimized / DLL files
