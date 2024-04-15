@@ -69,6 +69,27 @@ class MyUnitTests(unittest.TestCase):
         result = create_titles(test_data)
         self.assertEqual(result, expected_result)
 
+# Python's unpacking *operator, like JS ...rest, unlimited POSITIONAL arguments (100,200,300) 
+def my_sum(*args) -> int: # ...rest *args, 
+    
+    the_sum = 0
+    for i in args:
+        the_sum += i
+    return the_sum
+
+# Python's unpacking **operator, like JS ...rest, but for unlimited KEYWORD args, (a="Hello", b="World")
+def my_concat(**kwargs) -> list:
+    lst = []
+    for v in kwargs.values():
+        lst += v
+    return lst
+
+# def my_create_contact(*args):
+#     if len(args) != 3:
+#         print("error: must pass in 3 parameters")
+#         return {"error":"error"}
+
+
 if __name__ == '__main__':
     """ will end program if y=unit test run
     print("\n---unit testing")
@@ -192,10 +213,18 @@ if __name__ == '__main__':
     print(f"my_str14.strip(',') = {my_str14.strip(',')}")
     my_str14 = ",,,,,honey--88999...."
     print(f"my_str14.strip(',89.') = {my_str14.strip(',89.')}")
-    
+    print("\n---zoo list")
+    my_zoo = ["elephant", "snake", "monkey", "tiger", "rhino"]
+    print(f"my_zoo = {my_zoo}")
+    my_zoo.pop(3) # remove animal from third index
+    my_zoo.append("lion") # add a lion to the end of the list
+    my_zoo.pop(0) # remove the first animal from the list
+    print(f"my_zoo = {my_zoo}")
+    print(f"my_zoo[:3] = {my_zoo[:3]}")
+
     ls_test_1 = [2,3,4,5,6,7] 
 
-    # for loops
+    # for loops. for, for with enumerate and for with range
     print("\n---for loop")
     for item in ls_test_1:
         print(f"{item}")
@@ -208,7 +237,7 @@ if __name__ == '__main__':
         # print(f"{i}", end=" ")
         ls_long_1.append(i)
     
-    # printing with unpacking
+    # printing with *unpacking (...spreading)
     print(
         *ls_long_1, sep=" ", end="\n"
     )  # astrix unpacks the list iterable into a new list iterable without formatting
@@ -216,6 +245,16 @@ if __name__ == '__main__':
     first, second, *rest = ls_long_1 # unpacking into variables and a list iterable
     print(f"first={first}, second={second}, rest={rest}")
     
+    # printing with unpacking *args (...rest)
+    print("\n---python unpacking *args == ...rest")
+    print(my_sum(1,2,3))
+    print(my_sum(1,2,3, 400, 500))
+
+    # printing with unpacking dictionaries with **kwargs (...rest)
+    print("\n---python unpacking **kwargs == ...rest")
+    print(my_concat(a="Happy", b="Birthday", c="To", d="You"))
+
+    # tuples. used for datasets
     # tuple unpacking
     print("\n---tuple unpacking")
     list_of_tups_1 = [(1, 2), (3, 4), (5, 6), (7, 8)]
@@ -227,6 +266,70 @@ if __name__ == '__main__':
     tuple_1 = (1, 2, 3, 4, 5, 6)
     tuple_2 = (11, 12, 13, 14, 15, 16, 17, 18)
     print(list(zip(tuple_1, tuple_2)))
+
+    # set (no duplicates). used for very fast organisation and remove duplicates from list
+    print("\n---sets")
+    my_set1 = {1,2,2,3,3,4,5,6}
+    print(f"my_set1 = {my_set1}")
+    print(f"len(my_set1) = {len(my_set1)}") # uniques only
+    #print(f"my_set1[0]{my_set1[0]}") # error, sets are unordered, cannot access by index
+    my_set1.add(100)
+    print(f"my_set1.add(100) = ", end= "") # add value to the set
+    print(my_set1)
+    my_set1.discard(1)
+    print(f"my_set1.discard(1) = ", end= "") # remove value from the set
+    print(*my_set1, sep="-", end = "\n")
+    my_set1.clear()
+    print(f"my_set1.clear() = ", end= "") # clear all values from the set
+    print(my_set1)
+    my_set1.update([2000, 2001])
+    print(f"my_set1.update([2000,2001]) = ", end= "") # add more than one value to the set
+    print(*my_set1, sep="_", end = "\n")
+
+    # dictionary (as of python 3.7, dictionaries are insertion ordered!)
+    print("\n---dictionaries")
+    my_dic1 = {"k1": 101, "k2": 102, 2233: 102.5, 333: 103, 'k4': 104}
+    for key,value in my_dic1.items():
+        print(f"key = {key}, value = {value}")
+    # reverse the key and value for each item
+    rev_dic1 = {v:k for k,v in my_dic1.items()}
+    print(f"rev_dic1 = {rev_dic1}")
+    print ("popping first key in the dictionary")
+    rev_dic1.pop(101)
+    print(f"rev_dic1 = {rev_dic1}")
+    rev_dic2 = rev_dic1 # "reference copy", rev_dic2 points to rev_dic1 data
+    #rev_dic3 = rev_dic1.copy() # "value copy" via copy method
+    rev_dic3 = {**rev_dic1} # unpacking / spread "value copy" of KEYWORD args double asterisk
+    print("pooping 102 from rev_dic2")
+    rev_dic2.pop(102)
+    print(f"rev_dic1 = {rev_dic1}")
+    print(f"rev_dic2 = {rev_dic2}")
+    print("pooping 103 from rev_dic3")
+    rev_dic3.pop(103)
+    print(f"rev_dic1 = {rev_dic1}")
+    print(f"rev_dic3 = {rev_dic3}")
+    print("---assignment")
+    my_vehicle = {
+        "model": "Ford",
+        "make": "Explorer",
+        "year": 2018,
+        "mileage": 40000
+    }
+    for k,v in my_vehicle.items():
+        print(f"key={k}, value={v}")
+    my_vehicle2 = {**my_vehicle}
+    print(f"my_vehicle2 = {my_vehicle2}")
+    # adding items to vehicle 2
+    my_vehicle2.update({"number_of_tyres":4}) # pass dictionary item to update method
+    my_vehicle2["number_of_exhausts"]=1 # create a new key and assign it a value
+    print(f"my_vehicle2 = {my_vehicle2}")
+    # deleting items form vehicle 2
+    my_vehicle2.pop("number_of_tyres") # delete the mileage key / value pair
+    my_vehicle2.popitem() # delete the final key / value pair
+    del my_vehicle2["mileage"] # delete the mileage key / value pair
+    print(f"my_vehicle2 = {my_vehicle2}")
+    print([k for k in my_vehicle2.keys()]) # print only vehicle 2 keys using list comprehension
+
 
     # list iterable copying 
     print("\n---reference and value copying")

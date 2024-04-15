@@ -70,7 +70,7 @@ class MyUnitTests(unittest.TestCase):
         self.assertEqual(result, expected_result)
 
 # Python's unpacking *operator, like JS ...rest, unlimited POSITIONAL arguments (100,200,300) 
-def my_sum(*args): # ...rest *args, 
+def my_sum(*args) -> int: # ...rest *args, 
     
     the_sum = 0
     for i in args:
@@ -78,11 +78,17 @@ def my_sum(*args): # ...rest *args,
     return the_sum
 
 # Python's unpacking **operator, like JS ...rest, but for unlimited KEYWORD args, (a="Hello", b="World")
-def my_concat(**kwargs):
+def my_concat(**kwargs) -> list:
     lst = []
     for v in kwargs.values():
         lst += v
     return lst
+
+# def my_create_contact(*args):
+#     if len(args) != 3:
+#         print("error: must pass in 3 parameters")
+#         return {"error":"error"}
+
 
 if __name__ == '__main__':
     """ will end program if y=unit test run
@@ -302,6 +308,28 @@ if __name__ == '__main__':
     rev_dic3.pop(103)
     print(f"rev_dic1 = {rev_dic1}")
     print(f"rev_dic3 = {rev_dic3}")
+    print("---assignment")
+    my_vehicle = {
+        "model": "Ford",
+        "make": "Explorer",
+        "year": 2018,
+        "mileage": 40000
+    }
+    for k,v in my_vehicle.items():
+        print(f"key={k}, value={v}")
+    my_vehicle2 = {**my_vehicle}
+    print(f"my_vehicle2 = {my_vehicle2}")
+    # adding items to vehicle 2
+    my_vehicle2.update({"number_of_tyres":4}) # pass dictionary item to update method
+    my_vehicle2["number_of_exhausts"]=1 # create a new key and assign it a value
+    print(f"my_vehicle2 = {my_vehicle2}")
+    # deleting items form vehicle 2
+    my_vehicle2.pop("number_of_tyres") # delete the mileage key / value pair
+    my_vehicle2.popitem() # delete the final key / value pair
+    del my_vehicle2["mileage"] # delete the mileage key / value pair
+    print(f"my_vehicle2 = {my_vehicle2}")
+    print([k for k in my_vehicle2.keys()]) # print only vehicle 2 keys using list comprehension
+
 
     # list iterable copying 
     print("\n---reference and value copying")
