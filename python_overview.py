@@ -23,6 +23,9 @@ from create_titles import create_titles
 from typing import List # generic List type
 from typing import Dict # generic List type
 
+# Hero battle OOP game
+from hero_battle.Enemy import *
+
 # Iterables
 # An iterable is any Python object capable of returning its members one at a time, permitting it to be iterated over in a for-loop.
 # Sequential iterables: lists, tuples, and strings
@@ -34,7 +37,6 @@ from typing import Dict # generic List type
 # JS ...spread expands an iterable into individual elements
 # Python *rest: first, second, *rest = long_list # first 2 items from list put into "first" and "second" vars and the remaining items are put into a list called "rest"
 # Python *spread: lst=[1,2,3]; new_list=[*lst, 4, 5]; print(new_list) # 1,2,3,4,5; lst was unpacked (...spread) into its individual items
-
 
 # Strings, numbers (ints and floats) and tuples are immutable. Give performance optimisation, thread safety, memory efficiency, easier debugging, etc
 
@@ -162,6 +164,15 @@ if __name__ == '__main__':
     print(f"True or False = {True or False}")
     print(f"True and not False = {True and not False}")
 
+    # big-list-1
+    # strings (and formated string literals, f-strings)
+    # concat with +, f-string, .join
+    # slicing with slice[:], f-strings, list()
+    # case: .upper(), .lower(), .title()
+    # replace all characters in a string with .replace(), or certain number of chars with replace(num)
+    # check if it contains with operator.contains(), need to import operator
+    # evaluate expression in string with eval()
+    # trim leading/trailing whitespace via .split(), or remove all .,89 trailing/leading characters with .split(".,89")
     # maths functions
     # abs()
     # round()
@@ -175,14 +186,6 @@ if __name__ == '__main__':
     rand_int = randint(1,100) # import randint
     print(f"rand_int={rand_int}")
 
-    # strings (and formated string literals, f-strings)
-    # concat with +, f-string, .join
-    # slicing with slice[:], f-strings, list()
-    # case: .upper(), .lower(), .title()
-    # replace all characters in a string with .replace(), or certain number of chars with replace(num)
-    # check if it contains with operator.contains(), need to import operator
-    # evaluate expression in string with eval()
-    # trim leading/trailing whitespace via .split(), or remove all .,89 trailing/leading characters with .split(".,89")
     print("\n---formated string literals")
     my_money = 50
     my_spend = 15 * 1.03
@@ -372,6 +375,7 @@ if __name__ == '__main__':
         
     ls_test_1 = [2,3,4,5,6,7] 
 
+    # big-list-2
     # list iterable methods / functions
     # ".pop", ".shift", ".push", ".unshift" with .pop() and .insert(val, idx)
     # delete by value with .remove
@@ -469,3 +473,30 @@ if __name__ == '__main__':
     for i in ls_to_append_temp:
         ls_test_1.append(i) # append() adds a single value to the end of list iterable
     print(f"ls_test_1 = {ls_test_1}") 
+
+    # OOP
+    print("\n---type inference off, explicit types in python, type hints for variables")
+    legs: int = 4
+    ears: int = 2
+    weight_kg: float = 70.3
+    name: str = "John Smith"
+    male: bool = True
+    print(f"legs={legs}, type(legs)={type(legs)}")
+    print(f"ears={ears}, type(ears)={type(ears)}")
+    print(f"weight_kg={weight_kg}, type(weight_kg)={type(weight_kg)}")
+    print(f"male={male}, type(male)={type(male)}")
+    print(f"name={name}, type(name)={type(name)}")
+    # using imported enemy class from hero_battle.Enemy
+    print("---hero battle with with encapsulation (private, name-mangled, attributes)")
+    zombie = Enemy("Zombie", 10, 1) # instantiate new enemy object
+    big_zombie = Enemy("Big-Zombie", 100, 10) # instantiate new enemy object
+    zombie.print_info()
+    big_zombie.print_info()
+    """BEWARE, we can create a new instance attribute called "__type_of_enemy" specific to the zombie
+    instance which is DIFFERENT from the private "__type_of_enemy" attribute defined in the class"""
+    #zombie.__type_of_enemy = "Oogggggre" # (1) new attribute specific to the zombie instance
+    #print(f"zombie.__type_of_enemy = {zombie.__type_of_enemy}") # (2) gives error (so long as (1) above not explicitly defined)
+    """ DON'T DO (1) or (2) above, won't be what we expect. DON'T DO (3) below, works but very bad practice"""
+    #print(f"zombie._Enemy__type_of_enemy = {zombie._Enemy__type_of_enemy}") # (3) works but linter saying don't do this, use getters & setters
+    """ DO (4) below, getters and setters are proper practice for private / name-mangled attributes"""
+    zombie.get_type_of_enemy() # (4) using the private attribute "__type_of_enemy" defined in the class
