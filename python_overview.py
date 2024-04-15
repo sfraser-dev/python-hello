@@ -15,8 +15,13 @@ from my_packages.module3 import module3
 from my_packages.sub_packages.module4 import module4
 from my_packages.sub_packages.module5 import module5
 
+# Unit testing
 import unittest
 from create_titles import create_titles
+
+# Type hints
+from typing import List # generic List type
+from typing import Dict # generic List type
 
 # Iterables
 # An iterable is any Python object capable of returning its members one at a time, permitting it to be iterated over in a for-loop.
@@ -35,10 +40,6 @@ from create_titles import create_titles
 
 # simple bank account class
 class Account:
-    def __init__(self) -> None:
-        self._owner = ""
-        self._balance = 0.0
-
     def __init__(self, o: str, b: float) -> None:
         self._owner= o
         self._balance = b
@@ -69,25 +70,43 @@ class MyUnitTests(unittest.TestCase):
         result = create_titles(test_data)
         self.assertEqual(result, expected_result)
 
-# Python's unpacking *operator, like JS ...rest, unlimited POSITIONAL arguments (100,200,300) 
-def my_sum(*args) -> int: # ...rest *args, 
-    
+# Python's unpacking *operator, like JS ...rest, unlimited POSITIONAL arguments, positional args: (100,200,300) 
+def my_sum(*args: int) -> int: # ...rest *args, 
     the_sum = 0
     for i in args:
         the_sum += i
     return the_sum
 
-# Python's unpacking **operator, like JS ...rest, but for unlimited KEYWORD args, (a="Hello", b="World")
-def my_concat(**kwargs) -> list:
-    lst = []
-    for v in kwargs.values():
-        lst += v
+# Python's unpacking **operator, like JS ...rest, but for unlimited KEYWORD arguments, keyword args: (a="Hello", b="World", c="\n")
+# **kwargs only for input parameters
+def my_concat1(**kwargs) -> list: # no type hints used for kwargs here
+    lst:List[str] = []
+    for k,v in kwargs.items():
+        print(f"k={k}, type(k)={type(k)}, v={v}, type(v={type(v)})")
+        lst+=v
     return lst
 
-# def my_create_contact(*args):
-#     if len(args) != 3:
-#         print("error: must pass in 3 parameters")
-#         return {"error":"error"}
+# Python type hint parameters for dictionary (no **unpacking operator)
+# type-hints only for input parameters
+def get_total_marks(scorecard: Dict[str, int]) -> int:
+    marks = list(scorecard.values())  # marks : List[int]
+    return sum(marks)
+
+# Python's unpacking **operator, like JS ...rest, but for unlimited KEYWORD arguments, keyword args: ("the_dict_in"={'apple': 5, 'banana': 3})
+# **kwargs and type-hints for input parameters: OVERKILL
+def my_concat2(**kwargs: Dict[str,str]) -> list: # type hints for **kwargs used here
+    lst:List[str] = []
+    input_dict = kwargs["the_dict_in"]
+    for v in input_dict.values():
+        lst+=v
+    return lst
+
+def my_create_contact(*args):
+    if len(args) != 3:
+        print("error: must pass in 3 parameters")
+        return {"error":"error"}
+    else:
+        return [args[0]]
 
 
 if __name__ == '__main__':
@@ -250,9 +269,17 @@ if __name__ == '__main__':
     print(my_sum(1,2,3))
     print(my_sum(1,2,3, 400, 500))
 
-    # printing with unpacking dictionaries with **kwargs (...rest)
-    print("\n---python unpacking **kwargs == ...rest")
-    print(my_concat(a="Happy", b="Birthday", c="To", d="You"))
+    # printing via unpacking dictionaries with **kwargs (...rest) and/or type-hinting
+    print("\n---python unpacking dictionaries with **kwargs / type-hinting combos")
+    # **kwargs only for input parameters
+    print(my_concat1( a="Happy", b="Bday", c="To", d="You")) # keyword args
+    # type-hints only for input parameters
+    scores_dic1 = {'english': 3, 'maths': 4, 'history': 3}
+    print(f"get_total_marks(scores_dic1) = {get_total_marks(scores_dic1)}")
+    # **kwargs and type-hints for input parameters: OVERKILL!
+    print(my_concat2( the_dict_in={"a":"Merry", "b":"Xmas", "c":"Everyone"})) # the_dict_in={} is needed to create keyword args, trick is 2nd argument is a dict
+    hogmanay = {"x":"Happy", "y":"New", "z":"Year"}
+    print(my_concat2(the_dict_in=hogmanay)) # the_dict_in={} is needed to create a keyword args, trick is 2nd argument is a dict
 
     # tuples. used for datasets
     # tuple unpacking
@@ -328,7 +355,7 @@ if __name__ == '__main__':
     my_vehicle2.popitem() # delete the final key / value pair
     del my_vehicle2["mileage"] # delete the mileage key / value pair
     print(f"my_vehicle2 = {my_vehicle2}")
-    print([k for k in my_vehicle2.keys()]) # print only vehicle 2 keys using list comprehension
+    print([k for k in my_vehicle2.keys()]) # print only vehicle 2's keys using list comprehension
 
 
     # list iterable copying 
@@ -442,5 +469,3 @@ if __name__ == '__main__':
     for i in ls_to_append_temp:
         ls_test_1.append(i) # append() adds a single value to the end of list iterable
     print(f"ls_test_1 = {ls_test_1}") 
-
-    
