@@ -500,3 +500,13 @@ if __name__ == '__main__':
     #print(f"zombie._Enemy__type_of_enemy = {zombie._Enemy__type_of_enemy}") # (3) works but linter saying don't do this, use getters & setters
     """ DO (4) below, getters and setters are proper practice for private / name-mangled attributes"""
     zombie.get_type_of_enemy() # (4) using the private attribute "__type_of_enemy" defined in the class
+
+    zombie_child = Zombie(5, 1)
+    zombie_child.talk()    
+    zombie_child.spread_disease()
+    # python method overloading (without @overload decorator)
+    zombie_child.spread_disease("Gyads min, I'm rife wee it")
+    # python method overloading (with @overload decorator)
+    zombie_child.eat_flesh()
+    zombie_child.eat_flesh(111222333)
+    zombie_child.eat_flesh("I love the taste of flesh in the morning")
