@@ -50,6 +50,12 @@ class Zombie(Enemy):
     def talk(self):
         print("The Rangers got zombified in 2012, grrrrrrr")
 
+    # method overloading
+    # cannot have overloading like c++ as python is dynamically
+    # typed, not statically typed like c++. cannot have methods
+    # with the same name, so overloading is achieved differently
+    # in python. 
+
     # method overloading is done using default values the method's
     # parameter list. but CANNOT have type hints if doing this 
     def spread_disease(self, msg=None)->None:
@@ -73,13 +79,13 @@ class Zombie(Enemy):
 
     def eat_flesh(self, msg=None) -> None: # definition
         if msg == None:
-            print("no argument: yummy flesh, yum yum, grrrrrrr")
+           print("no argument: yummy flesh, yum yum, grrrrrrr")
         elif (type(msg)==int):
-            print(f"integer argument: {msg}")
+           print(f"integer argument: {msg}")
         elif (type(msg)==str):
-            print(f"string argument: {msg}")
+           print(f"string argument: {msg}")
         else:
-            print("eat_flesh error")
+           print("eat_flesh error")
 
 # Ogre inherits from Enemy
 class Ogre(Enemy):
