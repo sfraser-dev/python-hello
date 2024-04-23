@@ -1,8 +1,13 @@
 import math
-import operator as op
+import operator as myop # for using myop.contains()
+from pprint import pprint # pretty print
+
+# Import shuffle funct from random module, usage: shuffle()
 from random import shuffle
+# Import randint func from random module, usage: randint()
 from random import randint
-from pprint import pprint  # pretty print
+# Import random module, usage random.function90, eg: random.random()
+import random 
 
 # A module is any .py file
 # A package is a collection (directory) of (related) modules which also contains an _init__.py file (can be empty)
@@ -57,7 +62,7 @@ class Account:
         self._balance -= w
         print(f"{w} withdrawn, new balance is {self._balance}")
 
-# create class that inherits from unittest.TestCase
+# Create class that inherits from unittest.TestCase
 class MyUnitTests(unittest.TestCase):
     # we normally number the tests that are going to be called
     def test1(self):
@@ -103,14 +108,35 @@ def my_concat2(**kwargs: Dict[str,str]) -> list: # type hints for **kwargs used 
         lst+=v
     return lst
 
-def my_create_contact(*args):
-    if len(args) != 3:
-        print("error: must pass in 3 parameters")
-        return {"error":"error"}
+# OOP battle of enemies
+def battle(e1: Enemy, e2: Enemy):
+    e1.talk()
+    e2.talk()
+
+    while e1.get_health_points() > 0 and e2.get_health_points()  > 0:
+        e1.print_info()
+        e2.print_info()
+        e1.possible_attribute_change()
+        e2.possible_attribute_change()
+        e2.attack()
+        e1.set_health_points(e1.get_health_points()-e2.get_attack_damage())
+        e1.attack()
+        e2.set_health_points(e2.get_health_points()-e1.get_attack_damage())
+
+    if e1.get_health_points() > 0:
+        print("Enemy 1 wins")
     else:
-        return [args[0]]
+        print("Enemy 2 wins")
 
+class Dog:
+    def say(self):
+        print("woof")
 
+class Cat:
+    def say(self):
+        print("meow")
+
+# Main
 if __name__ == '__main__':
     """ will end program if y=unit test run
     print("\n---unit testing")
@@ -141,7 +167,7 @@ if __name__ == '__main__':
     with open("test_file_with_as.txt", "w") as fh_2:
         fh_2.writelines(s+"\n" for s in my_text_list) # need to explicitly add newlines to writelines
 
-    # OOP
+    # object orientated programming (oop)
     print("\n---oop")
     joe = Account("joe", 101.11)
     print(joe)
@@ -222,7 +248,7 @@ if __name__ == '__main__':
     my_str12 = my_str11.replace("P","~")
     print(f"my_str12 = {my_str12}")
     # string contains (uses: import operator)
-    does_contain = op.contains(my_str12, "RISE")
+    does_contain = myop.contains(my_str12, "RISE")
     print(f"does_contain = {does_contain}")
     # evaluate expression in a string with eval()
     my_str13 = "(2**3)/4"
@@ -360,7 +386,6 @@ if __name__ == '__main__':
     print(f"my_vehicle2 = {my_vehicle2}")
     print([k for k in my_vehicle2.keys()]) # print only vehicle 2's keys using list comprehension
 
-
     # list iterable copying 
     print("\n---reference and value copying")
     ls_test_1 = [100, 90, 102, 103, 104, 105]
@@ -379,7 +404,7 @@ if __name__ == '__main__':
     # list iterable methods / functions
     # ".pop", ".shift", ".push", ".unshift" with .pop() and .insert(val, idx)
     # delete by value with .remove
-    # random with shuffle()
+    # random with shuffle, randint, random
     # break and fix with .join, .split
     # slice and splice with [:] and the slice() object
     # pythonic reducing with sum, len, min, max, all, any (instead of map, filter, reduce; also comprehensions rather than lambdas more pythonic)
@@ -410,11 +435,13 @@ if __name__ == '__main__':
     for idx, item in enumerate(ls_test_1):
         print(f"{idx}: {item}")
 
-    # random 
-    print("\n---shuffle, in place")
+    # shuffle, randint and random 
+    print("\n---shuffle, randint and random")
     #shuffle(ls_long_1)
-    shuffle(ls_long_1)
-    print((ls_long_1))
+    shuffle(ls_long_1) # shuffle the list
+    print((f"shuffling list iterable in place: {ls_long_1}"))
+    print(f"random int between 1 & 10, inclusive of 1 and 10 (1,10): {randint(1,10)}")
+    print(f"random float between 0 & 1, exclusive of zero and inclusive of 1 [0,1): {random.random()}")
 
     # join and split
     print("\n---join and split")
@@ -487,8 +514,8 @@ if __name__ == '__main__':
     print(f"male={male}, type(male)={type(male)}")
     print(f"name={name}, type(name)={type(name)}")
     # using imported enemy class from hero_battle.Enemy
-    print("---hero battle with with encapsulation (private, name-mangled, attributes)")
-    zombie = Enemy("Zombie", 10, 1) # instantiate new enemy object
+    print("---hero battle with with encapsulation (private, name mangled, attributes)")
+    zombie = Enemy("Zombie", 10, 2) # instantiate new enemy object
     big_zombie = Enemy("Big-Zombie", 100, 10) # instantiate new enemy object
     zombie.print_info()
     big_zombie.print_info()
@@ -496,9 +523,9 @@ if __name__ == '__main__':
     instance which is DIFFERENT from the private "__type_of_enemy" attribute defined in the class"""
     #zombie.__type_of_enemy = "Oogggggre" # (1) new attribute specific to the zombie instance
     #print(f"zombie.__type_of_enemy = {zombie.__type_of_enemy}") # (2) gives error (so long as (1) above not explicitly defined)
-    """ DON'T DO (1) or (2) above, won't be what we expect. DON'T DO (3) below, works but very bad practice"""
+    """ DON'T DO (1) or (2) above, will not be what we expect. DON'T DO (3) below, works but very bad practice"""
     #print(f"zombie._Enemy__type_of_enemy = {zombie._Enemy__type_of_enemy}") # (3) works but linter saying don't do this, use getters & setters
-    """ DO (4) below, getters and setters are proper practice for private / name-mangled attributes"""
+    """ DO (4) below, getters and setters are proper practice for private / name mangled attributes"""
     zombie.get_type_of_enemy() # (4) using the private attribute "__type_of_enemy" defined in the class
 
     zombie_child = Zombie(5, 1)
@@ -510,3 +537,23 @@ if __name__ == '__main__':
     zombie_child.eat_flesh()
     zombie_child.eat_flesh(111222333)
     zombie_child.eat_flesh("I love the taste of flesh in the morning")
+
+    ogre = Ogre(7, 3)
+    print(f"{ogre.get_type_of_enemy()} has {ogre.get_health_points()} health points and attacks with damage {ogre.get_attack_damage()}")
+    ogre.talk()
+
+    battle_zombie = Zombie(10,2)
+    battle_ogre = Ogre (7,3)
+    print("\n---time for OOP battle")
+    battle(battle_zombie, battle_ogre)
+
+    print("\n---duck types for 'virtual functions'")
+    # python duck types for "virtual functions"
+    pet_dog = Dog()
+    pet_dog.say() # prints "woof"
+    pet_cat = Cat()
+    pet_cat.say() # prints "meow"
+    pet_list = [pet_dog, pet_cat] # list of DIFFERENT instatiated objects
+    for a_pet in pet_list:
+        # terany operator, execute method if class has that attribute
+        a_pet.say() if hasattr(a_pet,"say") else ...
