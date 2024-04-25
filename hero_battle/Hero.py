@@ -32,11 +32,11 @@ class Weapon:
         self.__attack_increase += ai
 
 class Hero:
-    def __init__(self, hp:int, ad:int) -> None:
+    def __init__(self, hp:int, ad:int, w:Weapon) -> None:
         self.__health_points:int = hp
         self.__attack_damage:int = ad
-        self.__has_weapon:bool = False
-        self.weapon: Weapon
+        self.__weapon: Weapon = w # composition (has-a relationship; hero has a Weapon)
+        self.__is_weapon_activated:bool = False # guard inactive
 
     # __health_points getter and setter
     @property
@@ -53,16 +53,29 @@ class Hero:
     @attack_damage.setter
     def attack_damage(self, val_in:int) -> None:
         self.__attack_damage = val_in
-    
-    # __has_weapon getter and setter
+
+    # __is_weapon_activated getter and setter
     @property
-    def has_weapon(self) -> bool:
-        return self.__has_weapon
-    @has_weapon.setter
-    def has_weapon(self, val_in:bool) -> None:
-        self.__has_weapon = val_in
-    
-    def equip_waepon(self):
-        if self.weapon is not None and not self.has_weapon:
+    def is_weapon_activated(self) -> bool:
+        return self.__is_weapon_activated
+    @is_weapon_activated.setter
+    def is_weapon_activated(self, val_in:bool) -> None:
+        self.__is_weapon_activated = val_in
+
+    # __weapon getter and setter
+    @property
+    def weapon(self) -> Weapon:
+        return self.__weapon
+    @weapon.setter
+    def weapon(self, val_in:Weapon) -> None:
+        self.__weapon = val_in
+
+    def use_weapon(self):
+        if self.is_weapon_activated: # check if guard active
+            pass
+        else:
             self.attack_damage += self.weapon.attack_increase
-            self.has_weapon = True
+            self.is_weapon_activated = True # guard active
+
+    def attack (self) -> None:   
+        print(f"Hero attacks for {self.attack_damage} damage")

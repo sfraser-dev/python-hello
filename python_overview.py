@@ -109,8 +109,8 @@ def my_concat2(**kwargs: Dict[str,str]) -> list: # type hints for **kwargs used 
         lst+=v
     return lst
 
-# OOP battle of enemies
-def battle(e1: Enemy, e2: Enemy):
+# OOP enemies battling each other
+def enemy_v_enemy_battle(e1: Enemy, e2: Enemy):
     e1.talk()
     e2.talk()
 
@@ -129,6 +129,23 @@ def battle(e1: Enemy, e2: Enemy):
         print("Enemy 1 wins")
     else:
         print("Enemy 2 wins")
+
+# OOP hero battling an enemy (hero uses the pythonic @property decorator
+# for getters and setters, enemy uses non-pythonic getters and setters)
+def hero_v_enemy_battle(hero: Hero, enemy: Enemy):
+
+    while hero.health_points > 0 and enemy.get_health_points()  > 0:
+        print("----------")
+        enemy.possible_attribute_change()
+        enemy.attack()
+        hero.health_points -= enemy.get_attack_damage()
+        hero.attack()
+        enemy.set_health_points(enemy.get_health_points()-hero.attack_damage)
+
+    if hero.health_points > 0:
+        print("Hero wins")
+    else:
+        print("Enemy wins")
 
 class Dog:
     def say(self):
@@ -544,10 +561,20 @@ if __name__ == '__main__':
     print(f"{ogre.get_type_of_enemy()} has {ogre.get_health_points()} health points and attacks with damage {ogre.get_attack_damage()}")
     ogre.talk()
 
+    print("\n---time for enemy v enemy OOP battle")
     battle_zombie = Zombie(10,2)
     battle_ogre = Ogre (7,3)
-    print("\n---time for OOP battle")
-    battle(battle_zombie, battle_ogre)
+    enemy_v_enemy_battle(battle_zombie, battle_ogre)
+
+    print("\n---composition (has-a relationship): hero v enemy battle")
+    # interface: is-a relationship (car is a vehicle; inheritance)
+    # composition: has-a relationship (vehicle has an engine)
+    # composition is when a class has another class
+    # a vehicle must have an engine, but an engine need not have a vehicle
+    battle_baddie = Zombie (8,1) 
+    battle_goodie = Hero(5,1,Weapon("Sword",2))
+    battle_goodie.use_weapon()
+    hero_v_enemy_battle(battle_goodie, battle_baddie)
 
     print("\n---duck types (duck typing) for 'virtual functions'")
     # python duck types for "virtual functions"
@@ -559,13 +586,3 @@ if __name__ == '__main__':
     for a_pet in pet_list:
         # terany operator, execute method if class has that attribute
         a_pet.say() if hasattr(a_pet,"say") else ...
-
-    print("\n---composition (has-a relationship)")
-    # interface: is-a relationship (car is a vehicle; inheritance)
-    # composition: has-a relationship (vehicle has an engine)
-    # composition is when a class has another class
-    # a vehicle must have an engine, but an engine need not have a vehicle
-
-    weapon = Weapon("axe",1)
-    print(f"weapon.typeof = {weapon.typeof}") # @property decorator
-    print(f"weapon.attack_increase = {weapon.attack_increase}") # @attack_increase.seter
