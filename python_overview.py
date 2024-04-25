@@ -29,8 +29,7 @@ from typing import List # generic List type
 from typing import Dict # generic List type
 
 # Hero battle OOP game
-from hero_battle.Enemy import *
-from hero_battle.Hero import *
+from hero_battle.hero_and_enemies import *
 
 # Iterables
 # An iterable is any Python object capable of returning its members one at a time, permitting it to be iterated over in a for-loop.
