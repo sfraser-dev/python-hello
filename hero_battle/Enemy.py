@@ -19,7 +19,9 @@ class Enemy:
         self.__health_points: int = hp
         self.__attack_damage: int = ad
 
-    # getters and setters
+    # getters and setters (using getters and setters is
+    # non-pythonic, instead use the in-built
+    # @property decorator)
     def get_type_of_enemy(self) -> str:
         return self.__type_of_enemy
 

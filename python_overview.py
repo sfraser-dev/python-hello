@@ -30,6 +30,7 @@ from typing import Dict # generic List type
 
 # Hero battle OOP game
 from hero_battle.Enemy import *
+from hero_battle.Hero import *
 
 # Iterables
 # An iterable is any Python object capable of returning its members one at a time, permitting it to be iterated over in a for-loop.
@@ -114,6 +115,7 @@ def battle(e1: Enemy, e2: Enemy):
     e2.talk()
 
     while e1.get_health_points() > 0 and e2.get_health_points()  > 0:
+        print("----------")
         e1.print_info()
         e2.print_info()
         e1.possible_attribute_change()
@@ -547,7 +549,7 @@ if __name__ == '__main__':
     print("\n---time for OOP battle")
     battle(battle_zombie, battle_ogre)
 
-    print("\n---duck types for 'virtual functions'")
+    print("\n---duck types (duck typing) for 'virtual functions'")
     # python duck types for "virtual functions"
     pet_dog = Dog()
     pet_dog.say() # prints "woof"
@@ -557,3 +559,13 @@ if __name__ == '__main__':
     for a_pet in pet_list:
         # terany operator, execute method if class has that attribute
         a_pet.say() if hasattr(a_pet,"say") else ...
+
+    print("\n---composition (has-a relationship)")
+    # interface: is-a relationship (car is a vehicle; inheritance)
+    # composition: has-a relationship (vehicle has an engine)
+    # composition is when a class has another class
+    # a vehicle must have an engine, but an engine need not have a vehicle
+
+    weapon = Weapon("axe",1)
+    print(f"weapon.typeof = {weapon.typeof}") # @property decorator
+    print(f"weapon.attack_increase = {weapon.attack_increase}") # @attack_increase.seter
