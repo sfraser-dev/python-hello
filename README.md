@@ -1,4 +1,4 @@
 # Fast API
 
-My brief overview of Python. Then,
-code along with Roby & Darby's "Fast API - The Complete Course" on Udemy.
+The "Brief overview of Python" section from
+Roby & Darby's "Fast API - The Complete Course" on Udemy.
