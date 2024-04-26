@@ -575,7 +575,7 @@ if __name__ == '__main__':
     battle_goodie.use_weapon()
     hero_v_enemy_battle(battle_goodie, battle_baddie)
 
-    print("\n---duck types (duck typing) for 'virtual functions'")
+    print("\n---duck types (duck typing) for 'virtual functions', use 'hasattrib'")
     # python duck types for "virtual functions"
     pet_dog = Dog()
     pet_dog.say() # prints "woof"
