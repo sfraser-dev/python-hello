@@ -26,7 +26,7 @@ from create_titles import create_titles
 
 # Type hints
 from typing import List # generic List type
-from typing import Dict # generic List type
+from typing import Dict # generic Dictionary type
 
 # Hero battle OOP game
 from hero_battle.hero_and_enemies import *
