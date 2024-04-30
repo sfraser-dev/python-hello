@@ -585,3 +585,14 @@ if __name__ == '__main__':
     for a_pet in pet_list:
         # terany operator, execute method if class has that attribute
         a_pet.say() if hasattr(a_pet,"say") else ...
+
+    print("\n---MyPy Type Hints with append() and extend()")
+    ls_test_3: List = [1,2,3,4,5] # important: List by iteself means type Any
+    print(f"ls_test_3 = {ls_test_3}")
+    app_1: List[int] = [111, 222] # List of int type
+    # append pushes a SINGLE object to a list iterable
+    ls_test_3.append(app_1) # we can append a list (ie: [111,222]) to a type of List[Any] 
+    print(f"ls_test_3 = {ls_test_3}") # [1,2,3,4,5,[111,222]]
+    # extend pushes a MULTIPLE objects, one at a time, to a list iterable (objects are stored in a list)
+    ls_test_3.extend([8888,9999]) 
+    print(f"ls_test_3 = {ls_test_3}") # [1,2,3,4,5,[111,222],8888,9999]
