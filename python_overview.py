@@ -32,7 +32,8 @@ from typing import Dict # generic Dictionary type
 from hero_battle.hero_and_enemies import *
 
 # Iterables
-# An iterable is any Python object capable of returning its members one at a time, permitting it to be iterated over in a for-loop.
+# An iterable is any Python object capable of returning its members one at a time,
+# permitting it to be iterated over in a for-loop.
 # Sequential iterables: lists, tuples, and strings
 # Non-sequential iterables: dictionaries and sets
 
@@ -86,6 +87,7 @@ def my_sum(*args: int) -> int: # ...rest *args,
 
 # Python's unpacking **operator, like JS ...rest, but for unlimited KEYWORD arguments, keyword args: (a="Hello", b="World", c="\n")
 # **kwargs only for input parameters
+# print(my_concat1( a="Happy", b="Bday", c="To", d="You")) # keyword args
 def my_concat1(**kwargs) -> list: # no type hints used for kwargs here
     lst:List[str] = []
     for k,v in kwargs.items():
