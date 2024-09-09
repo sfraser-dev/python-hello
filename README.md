@@ -1,4 +1,3 @@
-# Fast API
+# Python Review
 
-The "Brief overview of Python" section from
-Roby & Darby's "Fast API - The Complete Course" on Udemy.
+Python playground for review and reference, tentatively based on Eric Roby's FastAPI course.
