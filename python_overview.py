@@ -35,7 +35,7 @@ from hero_battle.hero_and_enemies import *
 # An iterable is any Python object capable of returning its members one at a time,
 # permitting it to be iterated over in a for-loop.
 # Sequential iterables: lists, tuples, and strings
-# Non-sequential iterables: dictionaries and sets
+# Non-sequential iterables: dictionaries (but insertion ordered in Python 3.7 onwards) and sets
 
 # *Unpacking (...spread and ...rest)
 # Python's *unpacking is the same as JavaScript's ...spread and ...rest operators
@@ -598,3 +598,7 @@ if __name__ == '__main__':
     # extend pushes a MULTIPLE objects, one at a time, to a list iterable (objects are stored in a list)
     ls_test_3.extend([8888,9999]) 
     print(f"ls_test_3 = {ls_test_3}") # [1,2,3,4,5,[111,222],8888,9999]
+
+    print("\n---Python ternary operator")
+    # ternary
+    print("two is bigger than one") if 2 > 1 else print("two is not bigger than one")
