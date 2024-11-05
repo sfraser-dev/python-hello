@@ -602,3 +602,10 @@ if __name__ == '__main__':
     print("\n---Python ternary operator")
     # ternary
     print("two is bigger than one") if 2 > 1 else print("two is not bigger than one")
+
+    print("\n---Python reverse list traversal (-1, -1, -1)")
+    my_list = [1,2,3,4,5]
+    print(my_list)
+    for i in range(len(my_list)-1, -1, -1): # start at end, stop at one before -1, step of -1 (rev dir)
+        print(my_list[i])
+    print(my_list[::-1]) # reverse list via slicing with step size of -1 (more "pythonic")
