@@ -37,12 +37,27 @@ from hero_battle.hero_and_enemies import *
 # Sequential iterables: lists, tuples, and strings
 # Non-sequential iterables: dictionaries (but insertion ordered in Python 3.7 onwards) and sets
 
-# *Unpacking (...spread and ...rest)
-# Python's *unpacking is the same as JavaScript's ...spread and ...rest operators
-# JS ...rest put the remaining (rest of) values into an array
-# JS ...spread expands an iterable into individual elements
-# Python *rest: first, second, *rest = long_list # first 2 items from list put into "first" and "second" vars and the remaining items are put into a list called "rest"
-# Python *spread: lst=[1,2,3]; new_list=[*lst, 4, 5]; print(new_list) # 1,2,3,4,5; lst was unpacked (...spread) into its individual items
+# Python's *UNPACKING is the very similar to JavaScript's ...spread operator
+# JS ...spread expands an iterable into individual elements (unpacks vars out of suitcase called my_list)
+#
+# def add(a, b, c):
+#    return a + b + c
+# my_list = [1, 2, 3]
+# result = add(*my_list)  # Unpacks my_list into 1, 2, 3
+# print(result)  # Output: 6
+#
+# Python's *PACKING is the very similar to JavaScript's ...rest operator
+# JS ...rest put the remaining (rest of) values into an array (pack vars into suitcase called numbers)
+#
+# def sum_all(*numbers):
+#    total = 0
+#    for num in numbers:
+#        total += num
+#    return total
+# result1 = sum_all(1, 2, 3)  # Packs 1, 2, 3 into a list called numbers
+# print(result1)  # Output: 6
+#
+# Python *args is positional arguments, **kwargs is keyword arguments (for dictionaries)
 
 # Strings, numbers (ints and floats) and tuples are immutable. Give performance optimisation, thread safety, memory efficiency, easier debugging, etc
 
@@ -63,7 +78,7 @@ class Account:
         self._balance -= w
         print(f"{w} withdrawn, new balance is {self._balance}")
 
-# Create class that inherits from unittest.TestCase
+# Create class that inherits from "unittest.TestCase". Assert is a word that means "affirm".
 class MyUnitTests(unittest.TestCase):
     # we normally number the tests that are going to be called
     def test1(self):
@@ -86,8 +101,7 @@ def my_sum(*args: int) -> int: # ...rest *args,
     return the_sum
 
 # Python's unpacking **operator, like JS ...rest, but for unlimited KEYWORD arguments, keyword args: (a="Hello", b="World", c="\n")
-# **kwargs only for input parameters
-# print(my_concat1( a="Happy", b="Bday", c="To", d="You")) # keyword args
+# print(my_concat1(a="Happy",b="Bday",c="To",d="You")) # keyword args packed into suitcase/dict called kwargs
 def my_concat1(**kwargs) -> list: # no type hints used for kwargs here
     lst:List[str] = []
     for k,v in kwargs.items():
@@ -97,6 +111,7 @@ def my_concat1(**kwargs) -> list: # no type hints used for kwargs here
 
 # Python type hint parameters for dictionary (no **unpacking operator)
 # type-hints only for input parameters
+# all keys in the scorecard dictionary must be strings (str), and all values must be integers (int)
 def get_total_marks(scorecard: Dict[str, int]) -> int:
     marks = list(scorecard.values())  # marks : List[int]
     return sum(marks)
@@ -148,10 +163,10 @@ def hero_v_enemy_battle(hero: Hero, enemy: Enemy):
     else:
         print("Enemy wins")
 
+# Python is a duck-typed language, if it looks like a duck, it is a duck
 class Dog:
     def say(self):
         print("woof")
-
 class Cat:
     def say(self):
         print("meow")
@@ -165,7 +180,7 @@ if __name__ == '__main__':
 
     """ don't want to ask for user input all the time
     print("\n---try except")
-    while True:
+    while True:  # TEEF (try, except, else, finally)
         try:
             val = int(input("Input an integer: "))
         except ValueError:
@@ -178,14 +193,7 @@ if __name__ == '__main__':
             print("I always get printed")
     """
 
-    # file IO
-    fh1 = open("test_file.txt", "w")
-    fh1.write("original style 1\noriginal style 2")
-    fh1.close()
-    # "with" and "as" doesn't require the file handle to be closed
-    my_text_list = ["with as line 1", "with as line 2", "with as line 3"]
-    with open("test_file_with_as.txt", "w") as fh_2:
-        fh_2.writelines(s+"\n" for s in my_text_list) # need to explicitly add newlines to writelines
+    
 
     # object orientated programming (oop)
     print("\n---oop")
@@ -284,7 +292,8 @@ if __name__ == '__main__':
     print("\n---zoo list")
     my_zoo = ["elephant", "snake", "monkey", "tiger", "rhino"]
     print(f"my_zoo = {my_zoo}")
-    my_zoo.pop(3) # remove animal from third index
+    my_zoo.pop() # remove the last animal from the list (pop(-1) is default)
+    my_zoo.pop(2) # remove animal from index 2
     my_zoo.append("lion") # add a lion to the end of the list
     my_zoo.pop(0) # remove the first animal from the list
     print(f"my_zoo = {my_zoo}")
@@ -302,15 +311,16 @@ if __name__ == '__main__':
     ls_long_1 = []
     print("\n---for loop with range")
     for i in range(0, 50):
-        # print(f"{i}", end=" ")
+        print(f"{i}", end=" ", sep=" ")
         ls_long_1.append(i)
-    
+   
     # printing with *unpacking (...spreading)
+    print("\n---printing with *unpacking")
     print(
         *ls_long_1, sep=" ", end="\n"
-    )  # astrix unpacks the list iterable into a new list iterable without formatting
+    )  # astrix unpacks the list iterable into a new list iterable without formatting, so like print(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,....)
     print("\n---unpacking a list into specific variables then the remaining into *rest")
-    first, second, *rest = ls_long_1 # unpacking into variables and a list iterable
+    first, second, *rest = ls_long_1  # unpacking into variables and a list iterable
     print(f"first={first}, second={second}, rest={rest}")
     
     # printing with unpacking *args (...rest)
@@ -606,6 +616,14 @@ if __name__ == '__main__':
     print("\n---Python reverse list traversal (-1, -1, -1)")
     my_list = [1,2,3,4,5]
     print(my_list)
-    for i in range(len(my_list)-1, -1, -1): # start at end, stop at one before -1, step of -1 (rev dir)
+    for i in range(len(my_list)-1, -1, -1): # start at end, stop at one before -1 (zero), step of -1 (rev dir)
         print(my_list[i])
     print(my_list[::-1]) # reverse list via slicing with step size of -1 (more "pythonic")
+
+    print("\n---Dictionaries have mutable keys - mutable types are used in Python DSA")
+    dict1 = {"animal": "cat"}  # Correct dictionary creation
+    print(dict1["animal"])  # Output: cat
+    dict2 = dict1  # dict2 and dict1 reference the same dictionary
+    dict2["animal"] = "dog"  # Modify the shared dictionary
+    print(dict1["animal"])  # Output: dog (changes are reflected in dict1)
+    print(dict2["animal"])  # Output: dog (dict2 also reflects the changes)

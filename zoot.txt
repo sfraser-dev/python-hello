@@ -1,0 +1,305 @@
+
+---oop
+name is joe, balance is 101.11
+10 deposited, new balance is 111.11
+name is joe, balance is 111.11
+50 withdrawn, new balance is 61.11
+name is joe, balance is 61.11
+
+---modules, packages and libs
+I am in module1.py
+I am in module2.py
+I am in module3.py
+I am in module4.py
+I am in module5.py
+
+---logical operators: and, or, not
+True and False = False
+True or False = True
+True and not False = True
+abs(-4.55) = 4.55
+round(-4.55) = -5
+math.ceil(-4.55) = -4
+math.floor(-4.55) = -5
+rand_int=66
+
+---formated string literals
+I have $34.55 left
+
+---string concatenation
+my_str1 = hello world
+my_str4 = starship enterprise
+my_str8 = Joe-Danger-Bloggs
+my_str2[:4] = star
+my_str9 = Enterprise
+my_str10 = Enterprise
+my_str3 type = <class 'str'>
+my_temp_list type = <class 'list'>
+my_str11 = eNTERPRISE
+my_str12 = eNTER~RISE
+does_contain = True
+my_str13 = (2**3)/4, eval(my_str13) = 2.0
+
+---trimming with strip
+my_str14.strip() = honey--
+my_str14.strip(',') = honey--
+my_str14.strip(',89.') = honey--
+
+---zoo list
+my_zoo = ['elephant', 'snake', 'monkey', 'tiger', 'rhino']
+my_zoo = ['snake', 'tiger', 'lion']
+my_zoo[:3] = ['snake', 'tiger', 'lion']
+
+---for loop
+2
+3
+4
+5
+6
+7
+
+---for loop with enumerate
+0: 2
+1: 3
+2: 4
+3: 5
+4: 6
+5: 7
+
+---for loop with range
+0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 
+---printing with *unpacking
+0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49
+
+---unpacking a list into specific variables then the remaining into *rest
+first=0, second=1, rest=[2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49]
+
+---python unpacking *args == ...rest
+6
+906
+
+---python unpacking dictionaries with **kwargs / type-hinting combos
+k=a, type(k)=<class 'str'>, v=Happy, type(v=<class 'str'>)
+k=b, type(k)=<class 'str'>, v=Bday, type(v=<class 'str'>)
+k=c, type(k)=<class 'str'>, v=To, type(v=<class 'str'>)
+k=d, type(k)=<class 'str'>, v=You, type(v=<class 'str'>)
+['H', 'a', 'p', 'p', 'y', 'B', 'd', 'a', 'y', 'T', 'o', 'Y', 'o', 'u']
+get_total_marks(scores_dic1) = 10
+['M', 'e', 'r', 'r', 'y', 'X', 'm', 'a', 's', 'E', 'v', 'e', 'r', 'y', 'o', 'n', 'e']
+['H', 'a', 'p', 'p', 'y', 'N', 'e', 'w', 'Y', 'e', 'a', 'r']
+
+---tuple unpacking
+0: 1 2
+1: 3 4
+2: 5 6
+3: 7 8
+
+---tuple packing via zip (opposite of enumerate)
+[(1, 11), (2, 12), (3, 13), (4, 14), (5, 15), (6, 16)]
+
+---sets
+my_set1 = {1, 2, 3, 4, 5, 6}
+len(my_set1) = 6
+my_set1.add(100) = {1, 2, 3, 4, 5, 6, 100}
+my_set1.discard(1) = 2-3-4-5-6-100
+my_set1.clear() = set()
+my_set1.update([2000,2001]) = 2000_2001
+
+---dictionaries
+key = k1, value = 101
+key = k2, value = 102
+key = 2233, value = 102.5
+key = 333, value = 103
+key = k4, value = 104
+rev_dic1 = {101: 'k1', 102: 'k2', 102.5: 2233, 103: 333, 104: 'k4'}
+popping first key in the dictionary
+rev_dic1 = {102: 'k2', 102.5: 2233, 103: 333, 104: 'k4'}
+pooping 102 from rev_dic2
+rev_dic1 = {102.5: 2233, 103: 333, 104: 'k4'}
+rev_dic2 = {102.5: 2233, 103: 333, 104: 'k4'}
+pooping 103 from rev_dic3
+rev_dic1 = {102.5: 2233, 103: 333, 104: 'k4'}
+rev_dic3 = {102: 'k2', 102.5: 2233, 104: 'k4'}
+---assignment
+key=model, value=Ford
+key=make, value=Explorer
+key=year, value=2018
+key=mileage, value=40000
+my_vehicle2 = {'model': 'Ford', 'make': 'Explorer', 'year': 2018, 'mileage': 40000}
+my_vehicle2 = {'model': 'Ford', 'make': 'Explorer', 'year': 2018, 'mileage': 40000, 'number_of_tyres': 4, 'number_of_exhausts': 1}
+my_vehicle2 = {'model': 'Ford', 'make': 'Explorer', 'year': 2018}
+['model', 'make', 'year']
+
+---reference and value copying
+ls_test_1 = [90, 100, 102, 103, 104, 105]
+ls_test_1_ref = [90, 100, 102, 103, 104, 105]
+ls_test_1 = [8100, 10000, 10404, 10609, 10816, 11025]
+ls_test_1_new_copy= [90, 100, 102, 103, 104, 105]
+
+---pop, push, shift, unshift (remove or add by index position)
+ls_test_1 = [2, 3, 4, 5, 6, 7]
+about to pop off end...
+0: 2
+1: 3
+2: 4
+3: 5
+4: 6
+about to shift off of start...like perl reading function's arguments...
+0: 3
+1: 4
+2: 5
+3: 6
+about to push onto the end...
+ls_tests_1 = [3, 4, 5, 6, 3]
+about to unshift onto the start...
+ls_tests_1 = [3, 4, 5, 6, 3, 0]
+
+---remove(), remove by value in list iterable
+0: 3
+1: 4
+2: 6
+3: 3
+4: 0
+
+---shuffle, randint and random
+shuffling list iterable in place: [32, 0, 46, 7, 31, 28, 8, 40, 37, 48, 27, 47, 21, 6, 49, 11, 35, 25, 38, 42, 34, 41, 30, 45, 5, 14, 13, 18, 24, 22, 4, 12, 23, 9, 19, 10, 16, 20, 3, 29, 43, 2, 17, 44, 1, 33, 36, 26, 15, 39]
+random int between 1 & 10, inclusive of 1 and 10 (1,10): 4
+random float between 0 & 1, exclusive of zero and inclusive of 1 [0,1): 0.23833907401035093
+
+---join and split
+the_str1 = this is a test string
+the_str2 = thisisateststring
+
+---slicing
+[100, 90]
+[100, 90, 102]
+[100, 90, 102, 103, 104, 105]
+[105, 104, 103, 102, 90, 100]
+105
+100
+100
+ls_test_1[slice_object24] = [102, 103]
+
+---splicing
+original my_colors = ['red', 'green', 'blue', 'black']
+spliced my_colors = ['red', 'orange', 'yellow', 'aqua', 'black']
+
+---pythonic 'reducing' functions
+the_sum1 = 44
+the_len1 = 5
+the_min1 = 4, the_max1 = 15
+all(ls_test_1) = True
+any(ls_test_1) = True
+
+---sorting
+ls_test_1 = [4, 6, 7, 12, 15]
+
+---list concatenation
+ls_test_2 = [4, 6, 7, 12, 15, 1000, 1001]
+ls_test_2 = [4, 6, 7, 12, 15, 2000, 2001]
+ls_test_1 = [4, 6, 7, 12, 15, 3000, 3001]
+
+---type inference off, explicit types in python, type hints for variables
+legs=4, type(legs)=<class 'int'>
+ears=2, type(ears)=<class 'int'>
+weight_kg=70.3, type(weight_kg)=<class 'float'>
+male=True, type(male)=<class 'bool'>
+name=John Smith, type(name)=<class 'str'>
+---hero battle with with encapsulation (private, name mangled, attributes)
+Enemy constructor called
+Enemy constructor called
+Zombie has 10 health points and can do an attack of damage 2
+Big-Zombie has 100 health points and can do an attack of damage 10
+Enemy constructor called
+The Rangers got zombified in 2012, grrrrrrr
+The Zombie Rangers are trying to spread disease
+Gyads min, I'm rife wee it
+no argument: yummy flesh, yum yum, grrrrrrr
+integer argument: 111222333
+string argument: I love the taste of flesh in the morning
+Enemy constructor called
+Ogre has 7 health points and attacks with damage 3
+Og og og, Princess Fiona, watch me fight, ug ug ug
+
+---time for enemy v enemy OOP battle
+Enemy constructor called
+Enemy constructor called
+The Rangers got zombified in 2012, grrrrrrr
+Og og og, Princess Fiona, watch me fight, ug ug ug
+----------
+Zombie has 10 health points and can do an attack of damage 2
+Ogre has 7 health points and can do an attack of damage 3
+Ogre attacks for damage of 3.
+Zombie attacks for damage of 2.
+----------
+Zombie has 7 health points and can do an attack of damage 2
+Ogre has 5 health points and can do an attack of damage 3
+random adaption: zombie health has increased by 2 points
+Ogre attacks for damage of 3.
+Zombie attacks for damage of 2.
+----------
+Zombie has 6 health points and can do an attack of damage 2
+Ogre has 3 health points and can do an attack of damage 3
+random adaption: zombie health has increased by 2 points
+Ogre attacks for damage of 3.
+Zombie attacks for damage of 2.
+----------
+Zombie has 5 health points and can do an attack of damage 2
+Ogre has 1 health points and can do an attack of damage 3
+random adaption: zombie health has increased by 2 points
+random adaption: ogre attack has increased by 1 point
+Ogre attacks for damage of 4.
+Zombie attacks for damage of 2.
+Enemy 1 wins
+
+---composition (has-a relationship): hero v enemy battle
+Enemy constructor called
+----------
+random adaption: zombie health has increased by 2 points
+Zombie attacks for damage of 1.
+Hero attacks for 3 damage
+----------
+random adaption: zombie health has increased by 2 points
+Zombie attacks for damage of 1.
+Hero attacks for 3 damage
+----------
+random adaption: zombie health has increased by 2 points
+Zombie attacks for damage of 1.
+Hero attacks for 3 damage
+----------
+random adaption: zombie health has increased by 2 points
+Zombie attacks for damage of 1.
+Hero attacks for 3 damage
+----------
+random adaption: zombie health has increased by 2 points
+Zombie attacks for damage of 1.
+Hero attacks for 3 damage
+Enemy wins
+
+---duck types (duck typing) for 'virtual functions', use 'hasattrib'
+woof
+meow
+woof
+meow
+
+---MyPy Type Hints with append() and extend()
+ls_test_3 = [1, 2, 3, 4, 5]
+ls_test_3 = [1, 2, 3, 4, 5, [111, 222]]
+ls_test_3 = [1, 2, 3, 4, 5, [111, 222], 8888, 9999]
+
+---Python ternary operator
+two is bigger than one
+
+---Python reverse list traversal (-1, -1, -1)
+[1, 2, 3, 4, 5]
+5
+4
+3
+2
+1
+[5, 4, 3, 2, 1]
+
+---Dictionaries have mutable keys - mutable types are used in Python DSA
+cat
+dog
+dog
