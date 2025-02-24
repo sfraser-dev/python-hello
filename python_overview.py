@@ -61,6 +61,8 @@ from hero_battle.hero_and_enemies import *
 
 # Strings, numbers (ints and floats) and tuples are immutable. Give performance optimisation, thread safety, memory efficiency, easier debugging, etc
 
+# In place: check the return value of a function, if it's None, then it's an in-place function, if it has a return value, it's not in-place
+
 # simple bank account class
 class Account:
     def __init__(self, o: str, b: float) -> None:
@@ -124,6 +126,10 @@ def my_concat2(**kwargs: Dict[str,str]) -> list: # type hints for **kwargs used 
     for v in input_dict.values():
         lst+=v
     return lst
+
+def my_concat3(input_dict: dict) -> str:
+    """Concatenates the values of a dictionary into a single string."""
+    return "".join(input_dict.values())
 
 # OOP enemies battling each other
 def enemy_v_enemy_battle(e1: Enemy, e2: Enemy):
@@ -323,22 +329,26 @@ if __name__ == '__main__':
     first, second, *rest = ls_long_1  # unpacking into variables and a list iterable
     print(f"first={first}, second={second}, rest={rest}")
     
-    # printing with unpacking *args (...rest)
-    print("\n---python unpacking *args == ...rest")
+    # printing with packing input arguments into list iterable *args (...rest)
+    print("\n---python packing *args == ...rest")
     print(my_sum(1,2,3))
     print(my_sum(1,2,3, 400, 500))
 
-    # printing via unpacking dictionaries with **kwargs (...rest) and/or type-hinting
-    print("\n---python unpacking dictionaries with **kwargs / type-hinting combos")
+    # printing via packing input arguments into **kwargs dictionary (...rest) and/or type-hinting
+    print("\n---python packing keyword arguments into **kwargs dictionare / type-hinting combos")
     # **kwargs only for input parameters
     print(my_concat1( a="Happy", b="Bday", c="To", d="You")) # keyword args
     # type-hints only for input parameters
     scores_dic1 = {'english': 3, 'maths': 4, 'history': 3}
     print(f"get_total_marks(scores_dic1) = {get_total_marks(scores_dic1)}")
-    # **kwargs and type-hints for input parameters: OVERKILL!
+    # **kwargs and type-hints for input parameters: OVERKILL and CLUNKY!
     print(my_concat2( the_dict_in={"a":"Merry", "b":"Xmas", "c":"Everyone"})) # the_dict_in={} is needed to create keyword args, trick is 2nd argument is a dict
     hogmanay = {"x":"Happy", "y":"New", "z":"Year"}
     print(my_concat2(the_dict_in=hogmanay)) # the_dict_in={} is needed to create a keyword args, trick is 2nd argument is a dict
+    # better way to type hint with dictionaries
+    print("\n---better more pythonic way to do use type hinting with dictionaries")
+    print(my_concat3(hogmanay)) # no need for the **unpacking operator here
+
 
     # tuples. used for datasets
     # tuple unpacking
@@ -377,13 +387,13 @@ if __name__ == '__main__':
     my_dic1 = {"k1": 101, "k2": 102, 2233: 102.5, 333: 103, 'k4': 104}
     for key,value in my_dic1.items():
         print(f"key = {key}, value = {value}")
-    # reverse the key and value for each item
+    # reverse the key and value for each item using a dictionary comprehension
     rev_dic1 = {v:k for k,v in my_dic1.items()}
     print(f"rev_dic1 = {rev_dic1}")
     print ("popping first key in the dictionary")
     rev_dic1.pop(101)
     print(f"rev_dic1 = {rev_dic1}")
-    rev_dic2 = rev_dic1 # "reference copy", rev_dic2 points to rev_dic1 data
+    rev_dic2 = rev_dic1 # "reference copy", rev_dic2 points to same data as rev_dic1
     #rev_dic3 = rev_dic1.copy() # "value copy" via copy method
     rev_dic3 = {**rev_dic1} # unpacking / spread "value copy" of KEYWORD args double asterisk
     print("pooping 102 from rev_dic2")
@@ -439,12 +449,12 @@ if __name__ == '__main__':
     # slice and splice with [:] and the slice() object
     # pythonic reducing with sum, len, min, max, all, any (instead of map, filter, reduce; also comprehensions rather than lambdas more pythonic)
     # sort with .sort, sorted
-    # concate with append(val), [*unpack, val, val], lst += [val, val]
+    # concatenate with append(val), [*unpack, val, val], lst += [val, val]
 
     # pop(), pop(0), insert(val, len(arr)-1), insert(val, 0)
     print("\n---pop, push, shift, unshift (remove or add by index position)")
     print(f"ls_test_1 = {ls_test_1}")
-    ls_test_1.pop()  # "pop" off the end
+    ls_test_1.pop()  # "pop" off the end (default position is -1)
     print("about to pop off end...")
     for idx, item in enumerate(ls_test_1):
         print(f"{idx}: {item}")
@@ -452,11 +462,11 @@ if __name__ == '__main__':
     ls_test_1.pop(0) # "shift" off the start
     for idx, item in enumerate(ls_test_1):
         print(f"{idx}: {item}")
-    print("about to push onto the end...")
-    ls_test_1.insert(11, len(ls_test_1)-1) # "push" onto the end
+    print("about to push onto 11 on to the end...")  # .insert(index, value)
+    ls_test_1.insert(len(ls_test_1), 11)  # "push" onto the end, new value added at end of list iterable
     print(f"ls_tests_1 = {ls_test_1}")
-    print("about to unshift onto the start...")
-    ls_test_1.insert(11, 0) # "unshift" onto the start
+    print("about to unshift 12 onto the start...")
+    ls_test_1.insert(0, 12)  # "unshift" onto the start
     print(f"ls_tests_1 = {ls_test_1}")
 
     # remove by value
@@ -467,7 +477,6 @@ if __name__ == '__main__':
 
     # shuffle, randint and random 
     print("\n---shuffle, randint and random")
-    #shuffle(ls_long_1)
     shuffle(ls_long_1) # shuffle the list
     print((f"shuffling list iterable in place: {ls_long_1}"))
     print(f"random int between 1 & 10, inclusive of 1 and 10 (1,10): {randint(1,10)}")
@@ -476,6 +485,8 @@ if __name__ == '__main__':
     # join and split
     print("\n---join and split")
     the_str1 = "this is a test string"
+    print(f"the test string the_str1 = {the_str1}")
+    print(f"the_str1.split(' ') = {the_str1.split(' ')}") # return split string (space) as list iterable
     the_str2 = "".join(the_str1.split(" ")) # get rid of white space with join and spilt
     print(f"the_str1 = {the_str1}")
     print(f"the_str2 = {the_str2}")
@@ -483,37 +494,37 @@ if __name__ == '__main__':
     # slices (slice list iterable and make copies of list iterables)
     print("\n---slicing")
     ls_test_1 = [100, 90, 102, 103, 104, 105]
-    print(ls_test_1[:2])
-    print(ls_test_1[:3])
-    print(ls_test_1[::])  # print all of the list iterable
-    print(ls_test_1[::-1])  # reverse the list iterable
-    print(ls_test_1[-1])  # last item
-    print(ls_test_1[0])
-    print(ls_test_1[-6])  # 0 and -6 equivalent in a list iterable with 6 items
-    slice_object24 = slice(2,4)
+    print(ls_test_1[:2])  # 100, 90
+    print(ls_test_1[:3])  # 100, 90, 102
+    print(ls_test_1[::])  # 100, 90, 102, 103, 104, 105 (prints all of list iterable)
+    print(ls_test_1[::-1])  # 105, 104, 103, 102, 90, 100, reverse the list iterable
+    print(ls_test_1[-1])  # 105, get the last item
+    print(ls_test_1[0])  # 100
+    print(ls_test_1[-6])  # 100 (index 0 and index -6 equivalent in a list iterable with 6 items)
+    slice_object24 = slice(2,4)  # 102, 103
     print(f"ls_test_1[slice_object24] = {ls_test_1[slice_object24]}") # using "slice object" to slice the list iterable
 
     # splicing (assigning to a slice)
     print("\n---splicing")
     my_colors = ["red", "green", "blue", "black"]
-    print(f"original my_colors = {my_colors}")
-    my_colors [1:3] = ["orange", "yellow", "aqua"]
-    print(f"spliced my_colors = {my_colors}")
+    print(f"original my_colors = {my_colors}")  # 'red', 'green', 'blue', 'black'
+    my_colors [1:3] = ["orange", "yellow", "aqua"]  # EXCLUSIVE of index 3, length of replacement does not need to match the length of the slice it's replacing
+    print(f"spliced my_colors = {my_colors}")  # 'red', 'orange', 'yellow', 'aqua', 'black'
     
     # Guido wanted to remove map, filter, reduce and lambda from python 3!
     print("\n---pythonic 'reducing' functions")
     ls_test_1 = [12,4,15,6,7]
-    the_sum1 = sum(ls_test_1)
+    the_sum1 = sum(ls_test_1)  # 44
     print(f"the_sum1 = {the_sum1}")
-    the_len1 = len(ls_test_1)
+    the_len1 = len(ls_test_1)  # 5
     print(f"the_len1 = {the_len1}")
-    the_min1 = min(ls_test_1)
-    the_max1 = max(ls_test_1)
+    the_min1 = min(ls_test_1)  # 4
+    the_max1 = max(ls_test_1)  # 15
     print(f"the_min1 = {the_min1}, the_max1 = {the_max1}")
     # truthy test with all(), all must be true to return true
-    print(f"all(ls_test_1) = {all(ls_test_1)}")
+    print(f"all(ls_test_1) = {all(ls_test_1)}")  # True
     # truthy test with any(), any true returns true
-    print(f"any(ls_test_1) = {any(ls_test_1)}")
+    print(f"any(ls_test_1) = {any(ls_test_1)}")  # True
     
     # sorting
     print("\n---sorting")
@@ -524,7 +535,7 @@ if __name__ == '__main__':
     print("\n---list concatenation")
     ls_test_2 = [*ls_test_1, 1000, 1001] # concat via python *unpacking (...spread)
     print(f"ls_test_2 = {ls_test_2}")
-    ls_test_2 = ls_test_1 + [2000, 2001] # concat via "+"" sign
+    ls_test_2 = ls_test_1 + [2000, 2001] # concat via "+" sign
     print(f"ls_test_2 = {ls_test_2}") 
     ls_to_append_temp = [3000, 3001]
     for i in ls_to_append_temp:
@@ -588,6 +599,9 @@ if __name__ == '__main__':
     hero_v_enemy_battle(battle_goodie, battle_baddie)
 
     print("\n---duck types (duck typing) for 'virtual functions', use 'hasattrib'")
+    """Python uses duck typing, meaning that the type of an object is less important than the methods and attributes it has.
+    In the example, both Dog and Cat have a say() method. So, even though they are different classes, they can be treated similarly in the for loop.
+    This promotes flexibility and code reuse because you don't need to rely on strict type hierarchies."""
     # python duck types for "virtual functions"
     pet_dog = Dog()
     pet_dog.say() # prints "woof"
@@ -596,7 +610,7 @@ if __name__ == '__main__':
     pet_list = [pet_dog, pet_cat] # list of DIFFERENT instatiated objects
     for a_pet in pet_list:
         # terany operator, execute method if class has that attribute
-        a_pet.say() if hasattr(a_pet,"say") else ...
+        a_pet.say() if hasattr(a_pet,"say") else ...  # ellipses mean do nothing
 
     print("\n---MyPy Type Hints with append() and extend()")
     ls_test_3: List = [1,2,3,4,5] # important: List by iteself means type Any
@@ -610,7 +624,7 @@ if __name__ == '__main__':
     print(f"ls_test_3 = {ls_test_3}") # [1,2,3,4,5,[111,222],8888,9999]
 
     print("\n---Python ternary operator")
-    # ternary
+    # ternary, both components must be an expression, or use ellipses to "pass"
     print("two is bigger than one") if 2 > 1 else print("two is not bigger than one")
 
     print("\n---Python reverse list traversal (-1, -1, -1)")
@@ -620,7 +634,8 @@ if __name__ == '__main__':
         print(my_list[i])
     print(my_list[::-1]) # reverse list via slicing with step size of -1 (more "pythonic")
 
-    print("\n---Dictionaries have mutable keys - mutable types are used in Python DSA")
+    # dictionary values are mutable, but keys are immutable
+    print("\n---Dictionaries have mutable values - mutable types are used in Python DSA")
     dict1 = {"animal": "cat"}  # Correct dictionary creation
     print(dict1["animal"])  # Output: cat
     dict2 = dict1  # dict2 and dict1 reference the same dictionary

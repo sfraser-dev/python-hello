@@ -10,10 +10,11 @@ class Enemy:
         print("Enemy constructor called")
         # encapsulation: __type_of_enemy, __health_points,
         # __attack_damage are now private via double underscore
-        # (name mangling). Double underscore name mangling does
+        # (name mangling). Double underscore NAME MANGLING does
         # the following to attributes:
         # _Enemy__type_of_enemy (prepended the underscore
         # classname to the double underscored attribute name).
+        # Note that __dunder__ methods are not name mangled (two leading and trailing underscores)
         # use getters and setters instead
         self.__type_of_enemy: str = toe
         self.__health_points: int = hp
